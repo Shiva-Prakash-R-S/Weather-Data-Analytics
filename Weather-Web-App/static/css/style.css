@@ -1,0 +1,182 @@
+
+/* General page styling */
+body {
+    background-color: #f4f7fb;
+    font-family: Arial, sans-serif;
+    color: #263238;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #172554, #2563eb);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    color: white !important;
+    margin-left: 12px;
+}
+
+.nav-link:hover {
+    color: #bfdbfe !important;
+}
+
+/* Main container */
+.container {
+    max-width: 1200px;
+}
+
+/* Page headings */
+h2, h3 {
+    color: #172554;
+    font-weight: 700;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    background-color: #ffffff;
+    font-weight: bold;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Dashboard statistic cards */
+.stat-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+}
+
+.stat-card h3 {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 7px;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    border-radius: 7px;
+    padding: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.12);
+}
+
+/* Tables */
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #eff6ff;
+    color: #172554;
+    white-space: nowrap;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Analytics charts */
+.chart-container {
+    position: relative;
+    min-height: 320px;
+    padding: 15px;
+}
+
+/* Footer */
+footer {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .chart-container {
+        min-height: 250px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
+
+body {
+    background-color: #f4f7fb;
+    font-family: Arial, sans-serif;
+    color: #263238;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #172554, #2563eb);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    background-color: white;
+    font-weight: bold;
+}
+
+.btn {
+    border-radius: 7px;
+}
+
+.table thead th {
+    background-color: #eff6ff;
+    color: #172554;
+}
+
+.chart-container {
+    position: relative;
+    min-height: 320px;
+}
+
+footer {
+    color: #64748b;
+    font-size: 14px;
+}

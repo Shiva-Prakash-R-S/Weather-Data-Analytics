@@ -1,0 +1,251 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Weather Analytics - Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Dashboard Header -->
+
+<div class="p-4 mb-4 bg-primary text-white rounded-4">
+
+    <h1 class="fw-bold">
+        Weather Data Analytics Dashboard
+    </h1>
+
+    <p class="mb-0">
+        Analyse Australian weather data using MongoDB and Python.
+    </p>
+
+</div>
+
+
+<!-- Statistics Cards -->
+
+<div class="row g-4 mb-4">
+
+    <!-- Total Records -->
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h6 class="text-secondary">
+                    Total Weather Records
+                </h6>
+
+                <h2 class="fw-bold text-primary">
+                    {{ "{:,}".format(total_records) }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Total Locations -->
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h6 class="text-secondary">
+                    Total Locations
+                </h6>
+
+                <h2 class="fw-bold text-success">
+                    {{ total_locations }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Database -->
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h6 class="text-secondary">
+                    Database
+                </h6>
+
+                <h5 class="fw-bold mt-2">
+                    weather_analytics
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Collection -->
+
+    <div class="col-md-6 col-lg-3">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h6 class="text-secondary">
+                    Collection
+                </h6>
+
+                <h5 class="fw-bold mt-2">
+                    weather_records
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Quick Navigation -->
+
+<h3 class="fw-bold mb-3">
+    Explore Your Project
+</h3>
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body">
+
+                <h4>CRUD Operations</h4>
+
+                <p class="text-secondary">
+                    Create, read, update and delete weather records.
+                </p>
+
+                <a href="/crud" class="btn btn-primary">
+                    Manage Records
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body">
+
+                <h4>Weather Analytics</h4>
+
+                <p class="text-secondary">
+                    Analyse temperature, rainfall and humidity patterns.
+                </p>
+
+                <a href="/analytics" class="btn btn-success">
+                    View Analytics
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Recent Weather Records -->
+
+<h3 class="fw-bold mb-3">
+    Recent Weather Records
+</h3>
+
+<div class="card shadow-sm border-0">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-light">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Min Temp</th>
+                    <th>Max Temp</th>
+                    <th>Rainfall</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>
+                        {{ record.Date.strftime('%Y-%m-%d') if record.Date else '-' }}
+                    </td>
+
+                    <td>
+                        {{ record.Location }}
+                    </td>
+
+                    <td>
+                        {{ record.MinTemp if record.MinTemp is not none else '-' }} °C
+                    </td>
+
+                    <td>
+                        {{ record.MaxTemp if record.MaxTemp is not none else '-' }} °C
+                    </td>
+
+                    <td>
+                        {{ record.Rainfall if record.Rainfall is not none else '-' }} mm
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="5" class="text-center">
+                        No weather records available.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

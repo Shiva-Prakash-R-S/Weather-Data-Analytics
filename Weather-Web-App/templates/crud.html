@@ -1,0 +1,323 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Weather Analytics - CRUD Operations
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Page Heading -->
+
+<div class="mb-4">
+
+    <h1 class="fw-bold">
+        Weather Record Management
+    </h1>
+
+    <p class="text-secondary">
+        Create, view and delete weather records using MongoDB.
+    </p>
+
+</div>
+
+
+<!-- CREATE WEATHER RECORD -->
+
+<div class="card shadow-sm border-0 mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+            Add New Weather Record
+        </h5>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <form action="/create" method="POST">
+
+            <div class="row g-3">
+
+                <!-- Date -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="Date"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        name="Location"
+                        class="form-control"
+                        placeholder="Enter location"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Minimum Temperature -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Minimum Temperature (°C)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="MinTemp"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Maximum Temperature -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Maximum Temperature (°C)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="MaxTemp"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Rainfall -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Rainfall (mm)
+                    </label>
+
+                    <input
+                        type="number"
+                        step="any"
+                        name="Rainfall"
+                        class="form-control"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Rain Today -->
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Rain Today
+                    </label>
+
+                    <select
+                        name="RainToday"
+                        class="form-select"
+                        required
+                    >
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Yes">
+                            Yes
+                        </option>
+
+                        <option value="No">
+                            No
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Submit Button -->
+
+                <div class="col-12">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary px-4"
+                    >
+                        Add Weather Record
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- READ WEATHER RECORDS -->
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h4 class="fw-bold">
+        Weather Records
+    </h4>
+
+    <span class="badge bg-primary">
+        {{ records|length }} Records Displayed
+    </span>
+
+</div>
+
+
+<div class="card shadow-sm border-0">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Location</th>
+
+                    <th>Min Temp</th>
+
+                    <th>Max Temp</th>
+
+                    <th>Rainfall</th>
+
+                    <th>Rain Today</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>
+                        {{ record.Date.strftime('%Y-%m-%d') if record.Date else '-' }}
+                    </td>
+
+                    <td>
+                        {{ record.Location }}
+                    </td>
+
+                    <td>
+                        {{ record.MinTemp if record.MinTemp is not none else '-' }}
+                    </td>
+
+                    <td>
+                        {{ record.MaxTemp if record.MaxTemp is not none else '-' }}
+                    </td>
+
+                    <td>
+                        {{ record.Rainfall if record.Rainfall is not none else '-' }}
+                    </td>
+
+                    <td>
+                        {{ record.RainToday or '-' }}
+                    </td>
+
+
+                    <!-- UPDATE AND DELETE BUTTONS -->
+
+                    <td>
+
+                        <a
+                            href="/edit/{{ record._id }}"
+                            class="btn btn-sm btn-warning"
+                        >
+                            Edit
+                        </a>
+
+
+                        <form
+                            action="/delete/{{ record._id }}"
+                            method="POST"
+                            class="d-inline"
+                            onsubmit="return confirm('Are you sure you want to delete this record?');"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn btn-sm btn-danger"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="7" class="text-center p-4">
+
+                        No weather records found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
